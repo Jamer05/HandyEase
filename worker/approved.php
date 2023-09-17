@@ -36,6 +36,10 @@ if (mysqli_num_rows($result) == 1) {
     $t = "UPDATE service SET status= '".$status."' WHERE id='" . $row[0] . "'";
     mysqli_query($conn, $t);
 
+    $stafff ="UPDATE users JOIN service on users.username = service.username
+    SET users.staff = service.aflag";
+    mysqli_query($conn, $stafff);
+    
     $to = $row[4];
     $location = $row[6];
     $area = $row[5];

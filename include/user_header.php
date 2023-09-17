@@ -5,8 +5,9 @@
                 <li class="active"><a href="#Home" class="scroll">Home</a></li>
                 |
                 <li><a href="customer.php">Customer</a></li>
+                |
                 <li><a href="chat_real.php">Chat</a></li>
-                <li><a href="logout.php">Signout</a></li>
+                <li><a href="logout.php">&nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Signout</a></li>
                 <div class="clearfix"></div>
             </ul>
         </div>

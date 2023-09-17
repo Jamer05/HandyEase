@@ -55,23 +55,22 @@
             </div>
             <div class="clearfix"></div>
         </div>
-        <div class="menu-bar">
+        <nav class="navbar">
             <div class="container">
-          
-                <div class="login-section">
-                    <ul>
-                        <li><a href="../authorizer/authorizer.php">Authorizer Login</a> </li>
-                        |
-                        <li><a class="active" href="admin.php">Admin Login</a> </li>
-                        |
-                        <li><a  href="../worker/worker.php">Worker Login</a> </li>
-                        |
-                        <div class="clearfix"></div>
-                    </ul>
+                <div class="top-menu">
+                    <div class="login-section">
+                        <ul>
+                            <li class="navbar-toggle"><a href = "../authorizer/authcheck.php">Authorizer</a></li>
+                            <li class="navbar-toggle"><a class="active" href="../admin/admin.php">Admin</a></li>
+                            <li class="navbar-toggle"><a  href="../worker/worker.php"> Worker</a></li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="clearfix"></div>
+
             </div>
-        </div>
+            <div class="clearfix"></div>
+        </nav>
     </div>
     <div class="main">
         <div class="container">

@@ -13,7 +13,7 @@ $area = mysqli_real_escape_string($conn, $_POST['city']);
 $location = mysqli_real_escape_string($conn, $_POST['locality']);
 $request = mysqli_real_escape_string($conn, $_POST['selser']);
 $email = mysqli_real_escape_string($conn, $_POST['email']);
-
+$staff = 'TRUE';
 
 // form validation: ensure that the form is correctly filled
 if (empty($fname)) {
@@ -58,7 +58,7 @@ if (count($errors) == 0) {
 	mysqli_stmt_bind_param($query, 'ssssssssssss', $id, $fname, $lname, $username, $hashedPassword, $phone, $request, $authid, $area, $location, $adminuser, $email);
 
 	$query_chat = mysqli_prepare($conn, "INSERT INTO users (name, username, password, staff) VALUES (?, ?, ?, ?)");
-	mysqli_stmt_bind_param($query_chat, 'ssss', $fname, $username, $hashedPassword, $id);
+	mysqli_stmt_bind_param($query_chat, 'ssss', $fname, $username, $hashedPassword, $staff);
 
 	if (mysqli_stmt_execute($query) && mysqli_stmt_execute($query_chat)) {
 		include '../include/success.php';

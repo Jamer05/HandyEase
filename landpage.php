@@ -3,27 +3,21 @@ session_start();
 error_reporting(0);
 if (!isset($_SESSION['username'])) {
     header('Location:index.php');
-} 
+}
 ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
+
     <title>HandyEase</title>
     <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
     <script src="js/jquery.min.js"></script>
     <link href="css/index.css" rel="stylesheet" type="text/css" media="all" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="application/x-javascript">
-    addEventListener("load", function() {
-        setTimeout(hideURLbar, 0);
-    }, false);
-
-    function hideURLbar() {
-        window.scrollTo(0, 1);
-    }
-    </script>
+    <script
+        type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <link
         href='//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic'
         rel='stylesheet' type='text/css'>
@@ -31,21 +25,19 @@ if (!isset($_SESSION['username'])) {
         type='text/css'>
     <script src="js/wow.min.js"></script>
     <link href="css/animate.css" rel='stylesheet' type='text/css' />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
     <script>
         new WOW().init();
     </script>
-    <script src="js/simpleCart.min.js"> </script>
     <script type="text/javascript" src="js/move-top.js"></script>
     <script type="text/javascript" src="js/easing.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
             $(".scroll").click(function (event) {
                 event.preventDefault();
-                $('html,body').animate({
-                    scrollTop: $(this.hash).offset().top
-                }, 1200);
+                $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1200);
             });
         });
     </script>
@@ -91,22 +83,26 @@ if (!isset($_SESSION['username'])) {
     <div class="header">
         <div class="container">
             <div>
-                <a href="index.php"><img src="images/home1.png" id="homeImage" class="img-responsive" alt="" /></a>
+                <a href="landpage.php"><img src="images/home1.png" id="homeImage" class="img-responsive" alt="" /></a>
             </div>
             <div class="clearfix"></div>
         </div>
     </div>
 
-
-   <?php include 'include/user_header.php';?>
-    <!-----
-         <div class="container1">
-            <div class="slide show" style="background: url(banner1.jpg) no-repeat;"></div>
-            <div class="slide" style="background: url(banner2.jpg) no-repeat;"></div>
-            <div class="slide show" style="background: url(banner3.jpg) no-repeat;"></div>
-         </div>
-         ------>
-
+    <div class="menu-bar">
+        <div class="container">
+            <div class="top-menu">
+                <ul>
+                    <li><a href="customer.php">Book</a></li>
+                    <li><a href="chat_real.php">Chat</a></li>
+                    <li><a href="appointment.php">Status</a></li>
+                    <li><a href="logout.php">Signout</a></li>
+                    <div class="clearfix"></div>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
 
     <!-- Container for the image gallery -->
     <div class="container2">
@@ -185,7 +181,7 @@ if (!isset($_SESSION['username'])) {
         <div class="ordering-section" id="Order">
             <div class="container">
                 <div class="ordering-section-head text-center wow bounceInRight" data-wow-delay="0.4s">
-                    <h3>Home Repair Service was never so easy</h3>
+                    <h3>Hello <?php echo $_SESSION['name']; ?></h3>
                     <div class="dotted-line">
                         <h4>Just 4 steps to follow </h4>
                     </div>
@@ -240,7 +236,7 @@ if (!isset($_SESSION['username'])) {
         <div class="ordering-section" id="Order">
             <div class="container">
                 <div class="ordering-section-head text-center wow bounceInRight" data-wow-delay="0.4s">
-                    <h3>Website</h3>
+                    <h3>Your Stats</h3>
                     <div class="dotted-line">
                         <h4>Statistics</h4>
                     </div>
@@ -294,9 +290,9 @@ if (!isset($_SESSION['username'])) {
                         <div class="ordering-section-grid-process wow fadeInRight" data-wow-delay="0.4s">
                             <i class="four"></i><br>
 
-                            <p style="margin-top: 0.1em;">Pending Jobs<br><br>
+                            <p style="margin-top: 0.1em;">Pending Jobs<br><br><br>
                                 <?php
-                                $que = "SELECT COUNT(*) as pending_customers FROM service WHERE transflag = 0";
+                                $que = "SELECT COUNT(*) as pending_customers FROM service WHERE status = 'Pending'";
                                 $result = mysqli_query($conn, $que);
                                 $ros4 = mysqli_fetch_row($result);
                                 echo $ros4[0];

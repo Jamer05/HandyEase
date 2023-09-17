@@ -1,4 +1,10 @@
-<?php include 'dbconn.php'; ?>
+<?php include 'dbconn.php';
+session_start();
+error_reporting(0);
+if (!isset($_SESSION['username'])) {
+   header('Location:index.php');
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -37,7 +43,7 @@
    <div class="header">
       <div class="container">
          <div>
-            <a href="index.php"><img src="images/home1.png" class="img-responsive" alt="" /></a>
+            <a href="landpage.php"><img src="images/home1.png" class="img-responsive" alt="" /></a>
          </div>
 
       </div>
@@ -48,11 +54,11 @@
       <div class="container">
          <div class="top-menu">
             <ul>
-            <li><a href="landpage.php">Home</a></li>
-            <li><a href="customer.php">Customer</a></li>
-                <li><a href="chat.php">Chat</a></li>
-                <li><a href="logout.php">Signout</a></li>
-                <div class="clearfix"></div>
+               <li><a href="customer.php">Book</a></li>
+               <li><a href="chat_real.php">Chat</a></li>
+               <li><a href="appointment.php">Status</a></li>
+               <li><a href="logout.php">Signout</a></li>
+               <div class="clearfix"></div>
             </ul>
          </div>
          <div class="clearfix"></div>
@@ -70,15 +76,16 @@
                      <input type="text" name="Id" id="cusid" readonly>
                   </div>
                   <div class="wow fadeInLeft" data-wow-delay="0.4s">
-                     <span>First Name<label>*</label></span>
-                     <input type="text" name="firstname" pattern="^[a-zA-Z'. -]+$">
+                     <span>Username<label>*</label></span>
+                     <input type="text" name="Username" id="uname" readonly>
                   </div>
                   <div class="wow fadeInLeft" data-wow-delay="0.4s">
-                     <span>Last Name<label>*</label></span>
-                     <input type="text" name="lastname" pattern="^[a-zA-Z'. -]+$">
+                     <span>Nick Name<label>*</label></span>
+                     <input type="text" name="Name" pattern="^[a-zA-Z'. -]+$">
                   </div>
+                  
                   <div class="wow fadeInRight" data-wow-delay="0.4s">
-                     <span>Email Address<label>*</label></span>
+                     <span>Email Address <label>*</label></span>
                      <input type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
                   </div>
                   <div class="wow fadeInRight" data-wow-delay="0.4s">
@@ -102,7 +109,7 @@
                      <span>Barangay and Street<label>*</label></span>
                      <input type="text" name="bar_street"">
                   </div>
-                  <div class="wow fadeInRight" data-wow-delay="0.4s">
+                  <div class=" wow fadeInRight" data-wow-delay="0.4s">
                      <span>Phone number<label>*</label></span>
                      <input type="text" name="phone" pattern="^(09|\+639)\d{9}$">
                   </div>
@@ -115,6 +122,10 @@
                         <option value="Washing Machine">Washing Machine - Php 800</option>
                         <option value="AC and Refrigerator">AC & Refrigerator - Php 650</option>
                      </select>
+                  </div>
+                  <div class="wow fadeInLeft" data-wow-delay="0.4s">
+                     <span>Additional Information<label>*</label></span>
+                     <input type="text" name="Name" pattern="^[a-zA-Z'. -]+$">
                   </div>
                </div>
                <div class="clearfix"> </div>
@@ -129,6 +140,7 @@
    </div>
    </div>
    <div class="clearfix"></div>
+
    <?php
    $query = mysqli_query($conn, "SELECT * FROM customer order by id desc limit 1");
    if (mysqli_num_rows($query) == 1) {
@@ -138,17 +150,20 @@
       $numrows = ((int) $num) + 1;
    }
    ?>
+
    <script type="text/javascript">
       String.prototype.padLeft = function (length, character) {
          return new Array(length - this.length + 1).join(character || '0') + this;
       }
       var num = '<?php echo $numrows; ?>';
+      var username = '<?php echo $_SESSION['username'] ?>';
       var str = 'CUS';
       // document.write(str);
       var str1 = num.padLeft(7, '0');
       //document.write(str1);
       str += str1;
       document.getElementById("cusid").value = str;
+      document.getElementById("uname").value = username;
    </script>
 
    <!-- footer-section-ends -->
@@ -160,7 +175,7 @@
 
       });
    </script>
-   <a  href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+   <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
    <?php include 'include/footer.php'; ?>
    <script>
       // var my_handlers = {

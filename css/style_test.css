@@ -39,6 +39,7 @@ table{
 }
 .header {
 	border-top: 3px solid #5BBD50;
+	background-color: #000000;
 }
 .top-header{
 	padding:2em 0;

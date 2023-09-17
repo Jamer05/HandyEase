@@ -191,10 +191,10 @@ if (!isset($_SESSION['sess_user'])) {
     $result = mysqli_query($conn, $q);
     $row = mysqli_fetch_array($result);
 
-    $payer = $row[7];
-    $service = $row[1];
-    $authid = $row[5];
-    $wid = $row[3];
+    $payer = $row[1];
+    $service = $row[2];
+    $authid = $row[6];
+    $wid = $row[4];
     $cid = $row[0];
 
     $q = "SELECT * FROM authoriser join worker where  worker.authid=authoriser.id and authoriser.id='" . $authid . "' and worker.id='" . $wid . "'";
@@ -202,7 +202,7 @@ if (!isset($_SESSION['sess_user'])) {
     $row = mysqli_fetch_array($result);
 
     $payee = $row[14] . " " . $row[15];
-    $authorizer = $row[1];
+    $authorizer = $row[3];
 
     ?>
     <script type="text/javascript">

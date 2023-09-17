@@ -1,7 +1,6 @@
 <?php include 'dbconn.php';
 
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -9,7 +8,7 @@
 	<title>HandyEase</title>
 	<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
 	<script src="js/jquery.min.js"></script>
-	<link href="css/index.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="css/style_client.css" rel="stylesheet" type="text/css" media="all" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="application/x-javascript">
 	addEventListener("load", function() {
@@ -28,7 +27,7 @@
 	<script src="js/wow.min.js"></script>
 	<link href="css/animate.css" rel='stylesheet' type='text/css' />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 	<script>
 		new WOW().init();
 	</script>
@@ -94,19 +93,21 @@
 	</div>
 
 
-	<div class="menu-bar">
+	<nav class="navbar">
 		<div class="container">
 			<div class="top-menu">
-				<ul>
-					<li class="active"><a href="#Home" class="scroll">Home</a></li>
-					|
-					<li><a href="login.php">Login/Register</a></li>
-					<div class="clearfix"></div>
-				</ul>
+				<div class="login-section">
+					<ul>
+						<li class="navbar-toggle"><a href="index.php">Home</a></li>
+						<li class="navbar-toggle"><a href="login.php">Login/Register</a></li>
+					</ul>
+				</div>
 			</div>
-		</div>
-	</div>
+			<div class="clearfix"></div>
 
+		</div>
+		<div class="clearfix"></div>
+	</nav>
 
 	<!-- Container for the image gallery -->
 	<div class="container2">
@@ -294,9 +295,9 @@
 						<div class="ordering-section-grid-process wow fadeInRight" data-wow-delay="0.4s">
 							<i class="four"></i><br>
 
-							<p style="margin-top: 0.1em;">Pending Jobs<br><br>
+							<p style="margin-top: 0.1em;">Pending Jobs<br><br><br>
 								<?php
-								$que = "SELECT COUNT(*) as pending_customers FROM service WHERE transflag = 0";
+								$que = "SELECT COUNT(*) as pending_customers FROM service WHERE status = 'Pending'";
 								$result = mysqli_query($conn, $que);
 								$ros4 = mysqli_fetch_row($result);
 								echo $ros4[0];

@@ -18,8 +18,8 @@ $logger->pushHandler(new StreamHandler(__DIR__ . '/act.log', Logger::DEBUG));
 $errors = array();
 // receive all input values from the form
 $id = mysqli_real_escape_string($conn, $_POST['Id']);
-$fname = mysqli_real_escape_string($conn, $_POST['firstname']);
-$lname = mysqli_real_escape_string($conn, $_POST['lastname']);
+$fname = mysqli_real_escape_string($conn, $_POST['Username']);
+$lname = mysqli_real_escape_string($conn, $_POST['Name']);
 $phone = mysqli_real_escape_string($conn, $_POST['phone']);
 $email = mysqli_real_escape_string($conn, $_POST['email']);
 $area = mysqli_real_escape_string($conn, $_POST['city']);
@@ -28,7 +28,7 @@ $request = mysqli_real_escape_string($conn, $_POST['selser']);
 $dateofreq = mysqli_real_escape_string($conn, date("Y-m-d"));
 $aflag = 0;
 $transflag = 0;
-$status = 0;
+$status = 'Ongoing';
 $logger->alert("Trying to book: $fname");
 // form validation: ensure that the form is correctly filled
 if (empty($fname)) {
@@ -64,8 +64,8 @@ if (count($errors) == 0) {
   $query = mysqli_prepare($conn, "INSERT INTO customer (id,firstname,lastname,phone,email,area,city) VALUES (?,?,?,?,?,?,?)");
   mysqli_stmt_bind_param($query, 'sssssss', $id, $fname, $lname, $phone, $email, $area, $location);
 
-  $query1 = mysqli_prepare($conn, "INSERT INTO service (id,request,dateofreq,authid,aflag,transflag,status) VALUES (?,?,?,?,?,?,?)");
-  mysqli_stmt_bind_param($query1, 'sssssis', $id, $request, $dateofreq, $authid, $aflag, $transflag, $status);
+  $query1 = mysqli_prepare($conn, "INSERT INTO service (id,username,request,dateofreq,authid,aflag,transflag,status) VALUES (?,?,?,?,?,?,?,?)");
+  mysqli_stmt_bind_param($query1, 'ssssssis', $id,$fname, $request, $dateofreq, $authid, $aflag, $transflag, $status);
   //if authid is empty don't let customer book
   if (empty($authid)) {
     $logger->error("No authoriser found for $location");
