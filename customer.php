@@ -56,7 +56,7 @@ if (!isset($_SESSION['username'])) {
             <ul>
                <li><a href="customer.php">Book</a></li>
                <li><a href="chat_real.php">Chat</a></li>
-               <li><a href="appointment.php">Status</a></li>
+               <li><a href="appointment.php">Updates</a></li>
                <li><a href="logout.php">Signout</a></li>
                <div class="clearfix"></div>
             </ul>

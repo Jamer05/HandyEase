@@ -35,7 +35,6 @@ label{
 }
 table{
 	text-align: center;
-	
 }
 .header {
 	border-top: 3px solid #5BBD50;
@@ -563,6 +562,7 @@ div.register-bottom-grid {
 .footer{
 	padding:3em 0;
 	background:#4D4D4D;
+	
 }
 .footer p{
 	color:#5BBD50;
@@ -585,7 +585,7 @@ div.register-bottom-grid {
     border-collapse: collapse;
     width: 100%;
     text-align: center;
-    margin-right: 10em;
+    margin-right:2em;
 }
 
 #customers td, #customers th {
@@ -614,7 +614,7 @@ div.register-bottom-grid {
     border-collapse: collapse;
     width: 100%;
     text-align: center;
-	margin-left: 10em;
+	margin-left: 2em;
 }
 
 #customers1 td, #customers1 th {
@@ -641,7 +641,7 @@ div.register-bottom-grid {
     border-collapse: collapse;
     width: 100%;
     text-align: center;
-    margin-left: 15em;
+    margin-right: 6em;
 }
 #customers2 td, #customers2 th {
     border: 1px solid #ddd;
@@ -855,4 +855,8 @@ canvas {
 }
 .image-responsive{
 	height: 30px;
+}
+.select-dropdown {
+	list-style-type: disc;
+	padding-left: 20px;
 }

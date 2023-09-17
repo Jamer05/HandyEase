@@ -13,7 +13,7 @@ if (!isset($_SESSION['sess_user'])) {
 
     <script src="../js/jquery.min.js"></script>
 
-    <link href="../css/style_me.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../css/style_test.css" rel="stylesheet" type="text/css" media="all" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="application/x-javascript">
@@ -191,7 +191,7 @@ if (!isset($_SESSION['sess_user'])) {
     $result = mysqli_query($conn, $q);
     $row = mysqli_fetch_array($result);
 
-    $payer = $row[1];
+    $payer = $row[0];
     $service = $row[2];
     $authid = $row[6];
     $wid = $row[4];

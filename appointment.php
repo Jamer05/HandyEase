@@ -52,7 +52,7 @@ if (!isset($_SESSION['username'])) {
     <title>HandyEase</title>
     <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
     <script src="js/jquery.min.js"></script>
-    <link href="css/style_test.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/style_me.css" rel="stylesheet" type="text/css" media="all" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script
         type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -135,7 +135,7 @@ if (!isset($_SESSION['username'])) {
 
                     <li><a href="customer.php">Book</a></li>
                     <li><a href="chat_real.php">Chat</a></li>
-                    <li><a href="appointment.php">Status</a></li>
+                    <li><a href="appointment.php">Updates</a></li>
                     <li><a href="logout.php">Signout</a></li>
                     <div class="clearfix"></div>
 
@@ -185,26 +185,26 @@ if (!isset($_SESSION['username'])) {
                             // $q = "SELECT * FROM service join users where service.username = users.username  and (service.status = 'Pending' or service.status = 'Approved' )";
                             $q = "SELECT DISTINCT *
                             FROM service
-                            JOIN users ON service.username =users.username
-                            JOIN worker ON service.aflag = worker.id
-                            WHERE service.status IN ('Pending', 'Approved','Ongoing')
+                            JOIN users ON service.username = users.username
+                            LEFT JOIN worker ON service.aflag = worker.id
+                            WHERE (service.status = 'Ongoing' OR service.status = 'Pending' OR service.status = 'Approved')
                             AND service.username = '$user_client'";
-                            
+
                             $res = mysqli_query($conn, $q);
                             // Flag variable to keep track of rows echoed
                             $rows_echoed = false;
 
                             if (mysqli_num_rows($res) > 0) {
                                 while ($row = mysqli_fetch_array($res)) {
-                                    if ($row['transflag'] == 0) {
+                                    if ($row['transflag'] == 0  ) {
                                         echo "<tr id='data'></tr>";
-                                        echo "<td  name='fname'>" . $row[1] . "</td>";
-                                        echo "<td  name='phone'>" . $row[2] . "</td>";
-                                        echo "<td  name='email'>" . $row[3] . "</td>";
-                                        echo "<td  name='area'>" . $row[7] . "</td>";
-                                        echo "<td  name='location'>" . $row[16] . "</td>";
-
-
+                                        echo "<td  name='Customer'>" . $row[1] . "</td>";
+                                        echo "<td  name='Reuest'>" . $row[2] . "</td>";
+                                        echo "<td  name='Date'>" . $row[3] . "</td>";
+                                        echo "<td  name='Status'>" . $row[7] . "</td>";
+                            
+                                        echo "<td name='Worker'>" . ($row[16] != '' ? $row[16] : 'Ongoing') . "</td>";
+            
                                         $rows_echoed = true; // Set flag to true since a row has been echoed
                                     }
                                 }

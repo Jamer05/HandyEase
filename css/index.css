@@ -429,7 +429,7 @@ h3.recent{
 	margin: 0 0 2em 0;
 	line-height: 1.5em;
 }
-.account-btn {
+.acount-btn {
 	background: #E24425;
 	color: #FFF;
 	font-size: 1em;
@@ -440,10 +440,10 @@ h3.recent{
 	-o-transition: 0.5s all;
 	display: inline-block;
 	text-transform: uppercase;
-	width: 100%;
+	width: 60%;
 	text-align: center;
 }
-.account-btn:hover, .login-right input[type="submit"]:hover{
+.acount-btn:hover, .login-right input[type="submit"]:hover{
 	background:#5BBD50;
 	text-decoration:none;
 	color:#fff;

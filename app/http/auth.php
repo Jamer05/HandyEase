@@ -25,7 +25,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
       # redirect to 'index.php' and pass the error message
       header("Location: ../../login.php?error=$em");
    } else {
-      $sql = "SELECT * FROM users WHERE staff NOT LIKE '%TRUE%' AND username = ?";
+      $sql = "SELECT * FROM users WHERE (staff IS NULL OR staff NOT LIKE '%TRUE%') AND username = ?";
 
       $stmt = $conn->prepare($sql);
       $stmt->execute([$username]);

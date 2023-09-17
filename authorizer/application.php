@@ -12,7 +12,7 @@ if (!isset($_SESSION['sess_user'])) {
     <title>HandyEase</title>
     <link href="../css/bootstrap.css" rel='stylesheet' type='text/css' />
     <script src="../js/jquery.min.js"></script>
-    <link href="../css/style_me.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../css/style_test.css" rel="stylesheet" type="text/css" media="all" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="application/x-javascript">
     addEventListener("load", function() {

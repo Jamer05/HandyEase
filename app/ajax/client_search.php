@@ -3,59 +3,59 @@
 session_start();
 
 # check if the user is logged in
-if (isset($_SESSION['username']) || isset($_SESSION['sess_user'])) {
-	# check if the key is submitted
-	if (isset($_POST['key'])) {
-		# database connection file
-		include '../dbconn.php';
+if (isset($_SESSION['username'])|| isset($_SESSION['sess_user'])) {
+    # check if the key is submitted
+    if(isset($_POST['key'])){
+       # database connection file
+	   include '../dbconn.php';
+	
+	   # creating simple search algorithm :) 
+	   $key = "%{$_POST['key']}%";
+     
+	//    $sql = "SELECT * FROM  users WHERE username =? ";
+	//    $sql = "SELECT * FROM  users
+	//            WHERE username
+	//            LIKE ? OR name LIKE ?";
+	$sql = "SELECT * FROM users
+	WHERE (username LIKE ? OR name LIKE ?) AND  (staff IS NULL OR staff NOT LIKE '%TRUE%')";
 
-		# creating simple search algorithm :) 
-		$key = "%{$_POST['key']}%";
+       $stmt = $conn->prepare($sql);
+       $stmt->execute([$key, $key]);
 
-		//    $sql = "SELECT * FROM  users WHERE username =? ";
-		//    $sql = "SELECT * FROM  users
-		//            WHERE username
-		//            LIKE ? OR name LIKE ?";
-		$sql = "SELECT * FROM users
-        WHERE (username LIKE ? OR name LIKE ?) AND staff IS NOT TRUE";
-		$stmt = $conn->prepare($sql);
-		$stmt->execute([$key, $key]);
+       if($stmt->rowCount() > 0){ 
+         $users = $stmt->fetchAll();
 
-		if ($stmt->rowCount() > 0) {
-			$users = $stmt->fetchAll();
+         foreach ($users as $user) {
+         	if ($user['user_id'] == $_SESSION['user_id']) continue;
+       ?>
+       <li class="list-group-item">
+		<a href="chat_pr.php?user=<?=$user['username']?>"
+		   class="d-flex
+		          justify-content-between
+		          align-items-center p-2">
+			<div class="d-flex
+			            align-items-center">
 
-			foreach ($users as $user) {
-				if ($user['user_id'] == $_SESSION['user_id'])
-					continue;
-				?>
-				<li class="list-group-item">
-					<a href="chat_pr.php?user=<?= $user['username'] ?>" class="d-flex
-				  justify-content-between
-				  align-items-center p-2">
-						<div class="d-flex
-						align-items-center">
+			    <img src="uploads/<?=$user['p_p']?>"
+			         class="w-10 rounded-circle">
 
-							<img src="uploads/<?= $user['p_p'] ?>" class="w-10 rounded-circle">
-
-							<h3 class="fs-xs m-2">
-								<?= $user['name'] ?>
-							</h3>
-						</div>
-					</a>
-				</li>
-			<?php }
-		} else { ?>
-			<div class="alert alert-info 
-					 text-center">
-				<i class="fa fa-user-times d-block fs-big"></i>
-				The user "
-				<?= htmlspecialchars($_POST['key']) ?>"
-				is not found.
+			    <h3 class="fs-xs m-2">
+			    	<?=$user['name']?>
+			    </h3>            	
 			</div>
-		<?php }
-	}
+		 </a>
+	   </li>
+       <?php } }else { ?>
+         <div class="alert alert-info 
+    				 text-center">
+		   <i class="fa fa-user-times d-block fs-big"></i>
+           The user "<?=htmlspecialchars($_POST['key'])?>"
+           is  not found.
+		</div>
+    <?php }
+    }
 
-} else {
+}else {
 	header("Location: ../../index.php");
 	exit;
 }
