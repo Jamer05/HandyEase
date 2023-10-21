@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap');
+
+h2{
+	text-align: center;
+	margin-bottom: 5rem;
+	font-size: 4rem;
+}
+
+.all-products {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 70px; /* Add margin to the bottom of the container */
+}
+
+
+.product {
+    border: 2px solid #2c3e50; /* Add a border with your desired color (#2c3e50) */
+    overflow: hidden;
+    background: #e6ffe6;
+    color: #21201e;
+    text-align: center;
+    width: 240px;
+    height: 400px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1.2rem;
+    margin: 2rem;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+}
+
+.product .product-title, .product {
+	font-size: 18px;
+
+}
+.product-price{
+	/* make it small and mute */
+	font-size: 10px;
+	color: #2c3e50;
+
+}
+.product:hover img{
+	scale:  1.1;
+}
+
+.product:hover {
+	box-shadow: 5px 15px 25px #eeeeee;
+}
+
+.product img {
+	height: 200px;
+	margin: 1rem;
+	transition: all 0.3s;
+}
+
+.product a:link, .product a:visited{
+	color: #ececec;
+	display: inline-block;
+	text-decoration: none;
+	background-color: #2c3e50;
+	padding: 1.2rem 3rem;
+	border-radius: 1rem;
+	margin-top: 1rem;
+	font-size: 14px;
+	transition: all 0.2s;
+}
+
+.product a:hover{
+	transform: scale(1.1);
+}

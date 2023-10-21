@@ -5,6 +5,7 @@ if (!isset($_SESSION['username'])) {
    header('Location:index.php');
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -49,7 +50,7 @@ if (!isset($_SESSION['username'])) {
       </div>
       <div class="clearfix"></div>
    </div>
-   </div>
+
    <div class="menu-bar">
       <div class="container">
          <div class="top-menu">
@@ -64,7 +65,7 @@ if (!isset($_SESSION['username'])) {
          <div class="clearfix"></div>
       </div>
    </div>
-   </div>
+
    <div class="main">
       <div class="container">
          <div class="register">
@@ -81,9 +82,9 @@ if (!isset($_SESSION['username'])) {
                   </div>
                   <div class="wow fadeInLeft" data-wow-delay="0.4s">
                      <span>Display Name<label>*</label></span>
-                     <input type="text" name="Name" id = "displayName" pattern="^[a-zA-Z'. -]+$">
+                     <input type="text" name="Name" id="displayName" pattern="^[a-zA-Z'. -]+$">
                   </div>
-                  
+
                   <div class="wow fadeInRight" data-wow-delay="0.4s">
                      <span>Email Address <label>*</label></span>
                      <input type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
@@ -107,45 +108,54 @@ if (!isset($_SESSION['username'])) {
                   </div>
                   <div class="wow fadeInLeft" data-wow-delay="0.4s">
                      <span>Complete Address<label>*</label></span>
-                     <input type="text" name="bar_street"">
+                     <input type="text" name="bar_street">
                   </div>
-                  <div class=" wow fadeInRight" data-wow-delay="0.4s">
+                  <div class="wow fadeInRight" data-wow-delay="0.4s">
                      <span>Phone number<label>*</label></span>
                      <input type="text" name="phone" pattern="^(09|\+639)\d{9}$">
                   </div>
                   <div class="wow fadeInRight" data-wow-delay="0.4s">
                      <span>Service<label>*</label></span>
                      <select name="selser">
-                        <option value="Plumber">Plumber - Php 1000</option>
-                        <option value="Electrician">Electrician - Php 1000 </option>
-                        <option value="Carpenter">Carpenter - Php 800</option>
-                        <option value="Washing Machine">Washing Machine - Php 800</option>
-                        <option value="AC and Refrigerator">AC & Refrigerator - Php 650</option>
+                        <option value="AC and Refrigerator">AC & Refrigerator</option>
                      </select>
                   </div>
+                  <div class="wow fadeInRight" data-wow-delay="0.4s">
+                     <span>Device type<label>*</label></span>
+                     <select name="seltype">
+                        <option value="Single Door">Single Door</option>
+                        <option value="Two Door Top Freezer">Two Door Top Freezer</option>
+                        <option value="Multi Door-Shelves">Multi Door-Shelves</option>
+                        <option value="Chest Freezer">Chest Freezer</option>
+                        <option value="Single Door Commercial">Single Door Commercial</option>
+                     </select>
+                  </div>
+
                   <div class="wow fadeInLeft" data-wow-delay="0.4s">
                      <span>Additional Information<label>*</label></span>
-            `         <input type="text" name="Information" pattern="^[a-zA-Z'. -]+$">
+                     <input type="text" name="Information" pattern="^[a-zA-Z'. -]+$">
                   </div>
+
+                  <!-- Add button that will show the price and details -->
+                  <button type="button" class="btn btn-default" id="showDetailsBtn">Show Pricing</button>
+                  <!-- It should be show here -->
+                  <div id="dynamicDetails"></div>
+
                </div>
                <div class="clearfix"> </div>
                <div class="clearfix"> </div>
                <div class="register-but">
                   <input type="submit" value="Submit">
-                  <br>
-                  <br>
-                  <br>
-                  <br>
-                  <!-- nbsp -->
-                  
                </div>
                <div class="clearfix"> </div>
             </form>
          </div>
       </div>
    </div>
+
+   <div id="dynamicDetails" style="display: none;">
+      <!-- Dynamic content will be placed here -->
    </div>
-   <div class="clearfix"></div>
 
    <?php
    $query = mysqli_query($conn, "SELECT * FROM customer order by id desc limit 1");
@@ -164,22 +174,62 @@ if (!isset($_SESSION['username'])) {
       var num = '<?php echo $numrows; ?>';
       var username = '<?php echo $_SESSION['username'] ?>';
       var str = 'CUS';
-      // document.write(str);
       var str1 = num.padLeft(7, '0');
-      //document.write(str1);
       str += str1;
       document.getElementById("cusid").value = str;
       document.getElementById("uname").value = username;
       document.getElementById("displayName").value = username;
    </script>
 
+<!-- Add button that will show the price and details -->
+<button type="button" class="btn btn-default" id="showDetailsBtn">Show details</button>
+<!-- It should be shown here -->
+<div id="dynamicDetails"></div>
+
+<script>
+   // Get references to the select elements
+   const serviceSelect = document.querySelector('select[name="selser"]');
+   const deviceTypeSelect = document.querySelector('select[name="seltype"]');
+
+   // Get references to the container and button
+   const dynamicDetailsContainer = document.getElementById('dynamicDetails');
+   const showDetailsBtn = document.getElementById('showDetailsBtn');
+
+   // Define pricing for each type of refrigerator (in Philippine Pesos)
+   const devicePricing = {
+      "Single Door": "₱395",
+      "Two Door Top Freezer": "₱450",
+      "Multi Door-Shelves": "₱500",
+      "Chest Freezer": "₱400",
+      "Single Door Commercial": "₱550"
+      // Add more types and prices as needed
+   };
+
+   // Add an event listener to the "Show details" button
+   showDetailsBtn.addEventListener('click', function () {
+      // Get the selected service and device type
+      const selectedService = serviceSelect.value;
+      const selectedDeviceType = deviceTypeSelect.value;
+
+      // Get the price based on the selected device type
+      const selectedDevicePrice = devicePricing[selectedDeviceType];
+
+      // Generate the dynamic content
+      const dynamicContent = `
+         <p>Device: ${selectedService}</p>
+         <p>Device Type: ${selectedDeviceType}</p>
+         <p name ="price" >Check Up Fee: <span style="color: red;">${selectedDevicePrice} Per Unit</span></p>
+      `;
+
+      // Update the container with the dynamic content
+      dynamicDetailsContainer.innerHTML = dynamicContent;
+   });
+</script>
+
    <!-- footer-section-ends -->
    <script type="text/javascript">
       $(document).ready(function () {
-
-
          $().UItoTop({ easingType: 'easeOutQuart' });
-
       });
    </script>
    <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>

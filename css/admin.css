@@ -3,6 +3,7 @@ body{
 	padding:0;
 	margin:0;
 	font-family: 'Source Sans Pro', sans-serif;
+	
 }
 .application{
 	background-color: white;
@@ -34,11 +35,15 @@ label{
 }
 table{
 	text-align: center;
+
 }
 .header {
 	border-top: 3px solid #5BBD50;
-	background-color: #000000;
+	background: #222;
+	margin-top: 1px;
+	border-bottom: 3px solid #5BBD50;
 }
+
 .top-header{
 	padding:2em 0;
 }
@@ -131,6 +136,10 @@ table{
 .top-menu ul li a:hover{
 	color:#5BBD50;
 }
+.login{
+	float:right;
+	margin-top:10px;
+}
 .login-section ul li{
 	display:inline-block;
 	margin: 0 16px;
@@ -148,52 +157,116 @@ table{
 .login-section ul li a:hover{
 	color:#5BBD50;
 }
-.menu-bar{
-	background:#1e1e1f;
-	padding:0.6em 0;
+
+/*navigation*/
+.navbar-submenu {
+	display: none;
 }
+
+.navbar-links:hover .navbar-submenu {
+	display: block;
+}
+.navbar{
+	margin-bottom: 5px;
+	/*make it square the angle*/
+	border-radius: 0;
+	display:flex;
+	background-color: #222;
+	width:100%;
+	border-bottom: 3px solid #5BBD50;
+	
+}
+.navbar ul{
+	display: flex;
+	width:100%;
+	align-items: center;
+	background-color: #222;
+	color:white;
+}
+.navbar li{
+	list-style-type: none;
+	padding: 1rem;
+	margin: 0 auto;
+}
+
+.navbar a{
+	text-decoration: none;
+	font-size: larger;
+	color:white;
+}
+.navbar a:hover{
+	color:white;
+}
+.navbar-toggle{
+	display: none;
+}
+.navbar-links:hover{
+	background-color:#5BBD50;
+	color:white;
+	border-radius: 25px;
+	transition: background-color 0.3s ease, color 0.3s ease;
+}@media (max-width: 600px) {
+    .navbar ul {
+        flex-wrap: wrap;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-links {
+        display: none;
+        width: 100%;
+        text-align: center;
+        /* Added */
+        color:white;
+        transition: opacity 0.3s ease, visibility 0.3s ease; /* Add opacity and visibility transition */
+        opacity: 0;
+        visibility: hidden; /* Set initial visibility to hidden */
+        transition-delay: 0.2s; /* Add delay before fading out */
+    }
+    .navbar-links:hover {
+        background-color: #5BBD50;
+        color: white;
+        /*round the ends*/
+        border-radius: 25px;
+    }
+    .a_b {
+        display: flex;
+        width: 600px;
+        margin-bottom: 20px;
+    }
+    .active {
+        display: block;
+        /* Added */
+        opacity: 1;
+        visibility: visible; /* Set visibility to visible when active */
+        transition-delay: 0s; /* Reset delay for active state */
+    }
+    .navbar .navbar-submenu {
+        display: none;
+        position: static;
+        background-color: #f8f8f8;
+        padding: 10px;
+    }
+
+    .navbar li:hover .navbar-submenu {
+        display: block;
+    }
+
+    .navbar .navbar-submenu li {
+        margin: 10px 10px;
+    }
+
+}
+
+
 .banner{
-	
 	min-height: 450px;
-	
 	background-size: cover;
 	position: relative;
 }
-.container1 {
-  width: 100%;
-  height: 704px;
-  position: relative;
-}
-.container1 .other-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  z-index: 2;
-  padding: 30px;
-  font-size: 50px;
-  color: white;
-}
-.container1 .slide {
-  z-index: 1;
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
-  height: 100%;
-  transition: opacity 1s ease-in-out;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  opacity: 0;
-}
-.container1 .slide.show {
-  opacity: 1;
-}
-
 .ordering-section{
 	padding:4em 0;
+	
 }
 .ordering-section-head h3{
 	color: #515151;
@@ -232,6 +305,7 @@ table{
 	min-height: 200px;
 	position:relative;
 	cursor: pointer;
+
 }
 .ordering-section-grid-process{
 	position:absolute;
@@ -356,6 +430,32 @@ li.item-lists {
   display: inline-block;
   vertical-align: middle;
 }
+@media (max-width:600px){
+	/*remove the dotted and arrow*/
+	.ordering-section-grid-process label{
+		display:none;
+	}
+	.dotted-line{
+		display:none;
+	}
+	/*add margin in each section grid process*/
+	.ordering-section-grid-process{
+		top: -20%;
+		left: 22%;
+	}
+	/*center all the text inside grid process*/
+	.ordering-section-grid-process p{
+		left:-35%;
+	}
+	/*center all the ordering-section* and background*/
+	.ordering-section-grid{
+		margin-left:20px
+	}
+	.website{
+		/*center*/
+		margin-right:40px;
+	}
+}
 .m_3 {
 	text-align: center;
 	position: relative;
@@ -382,7 +482,6 @@ span.middle-dotted-line{
 	text-indent: 100%;
 	background: url("../images/to-top2.png") no-repeat 0px 0px;
 }
-
 /*login-page*/
 
 .btn_form input[type="submit"] {
@@ -429,7 +528,7 @@ h3.recent{
 	margin: 0 0 2em 0;
 	line-height: 1.5em;
 }
-.acount-btn {
+.account-btn {
 	background: #E24425;
 	color: #FFF;
 	font-size: 1em;
@@ -442,8 +541,10 @@ h3.recent{
 	text-transform: uppercase;
 	width: 60%;
 	text-align: center;
+	margin-top:20px;
+	margin-left:10px;
 }
-.acount-btn:hover, .login-right input[type="submit"]:hover{
+.account-btn:hover, .login-right input[type="submit"]:hover{
 	background:#5BBD50;
 	text-decoration:none;
 	color:#fff;
@@ -492,6 +593,10 @@ h3.recent{
 .register{
 	padding:3em 0 5em 0;
 }
+.register-but{
+	float: right;
+	margin-right: 50px;
+}
 .register-top-grid h3, .register-bottom-grid h3 {
 	color:#000000;
 	font-size: 1.4em;
@@ -513,6 +618,7 @@ h3.recent{
 }
 .main{
 	margin-top: 60px;
+	/*fill the part*/
 }
 .register-top-grid input[type="text"] {
 	border: 1px solid #EEE;
@@ -560,11 +666,18 @@ input[type="password"] {
 div.register-bottom-grid {
 	margin-top:3em;
 }
-.footer{
-	padding:3em 0;
-    border-bottom: 6px solid #5BBD50;
-	background:#000000;
+.footer {
+	padding: 3em 0;
+	background: #222;
+	border-top: 3px solid #5BBD50;
+	border-bottom: 3px solid #5BBD50;
+	/* place the footer into the end of the screen */
+	position: absolute;
+	bottom: 0;	
+	width: 100%;
+		
 }
+
 .footer p{
 	color:#5BBD50;
 	font-size:16px;
@@ -584,9 +697,9 @@ div.register-bottom-grid {
 #customers {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
-    width: 100%;
+    width: 75%;
     text-align: center;
-    margin-left: 7em;
+    margin-left: 10em;
 }
 
 #customers td, #customers th {
@@ -601,7 +714,7 @@ div.register-bottom-grid {
 #customers tr:hover {background-color: #ddd;}
 
 #customers th {
-	padding-top: 12px;
+    padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
     background-color: #4CAF50;
@@ -637,17 +750,11 @@ div.register-bottom-grid {
 
 #customers1 tr:hover {background-color: #ddd;}
 
-#customers2 {
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-    text-align: center;
-	margin-left: 10em;
-}
 #customers2 td, #customers th {
     border: 1px solid #ddd;
     padding: 8px;
     font-size: 1.2em;
+
 }
 
 /*<!--#customers tr:nth-child(even){background-color: #f2f2f2;}-->*/
@@ -776,6 +883,7 @@ canvas {
 /* Position the image container (needed to position the left and right arrows) */
 .container2 {
   position: relative;
+  margin:0;
 }
 
 /* Hide the images by default */
@@ -832,6 +940,7 @@ canvas {
   background-color: #222;
   padding: 2px 16px;
   color: white;
+  margin:0;
 }
 
 .row:after {
@@ -857,13 +966,4 @@ canvas {
 }
 .image-responsive{
 	height: 30px;
-}
-
-/* add margin below the card */
-.card {
-	margin-bottom: 20px;
-}
-/* Plce refButton into right side and  add some decent design*/
-.btn-success {
-	float: right;
 }

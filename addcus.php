@@ -26,6 +26,7 @@ $area = mysqli_real_escape_string($conn, $_POST['city']);
 $location = mysqli_real_escape_string($conn, $_POST['locality']);
 $request = mysqli_real_escape_string($conn, $_POST['selser']);
 $dateofreq = mysqli_real_escape_string($conn, date("Y-m-d"));
+$price = mysqli_real_escape_string($conn, $_POST['price']);
 $aflag = 0;
 $transflag = 0;
 $status = 'Ongoing';

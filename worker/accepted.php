@@ -14,7 +14,7 @@ if (!isset($_SESSION['sess_user'])) {
 
     <script src="../js/jquery.min.js"></script>
 
-    <link href="../css/style_me.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../css/style_client.css" rel="stylesheet" type="text/css" media="all" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="application/x-javascript">
@@ -54,7 +54,7 @@ if (!isset($_SESSION['sess_user'])) {
 
 <body class="application">
 
-<nav class="navbar">
+    <nav class="navbar">
         <div class="container">
             <div class="top-menu">
                 <ul>
@@ -83,130 +83,132 @@ if (!isset($_SESSION['sess_user'])) {
 
     <div class="content">
         <div class="container">
-            <div class="clearfix"></div>
-            <div class="wow fadeInDownBig" data-wow-delay="0.4s">
-                <div class="table-responsive">
-                    <table id="customers2" align="right">
-                        <div class="clearfix"></div>
-                        <br>
-                        <tr>
-                            <th>Customer</th>
-                            <th>Phone Number</th>
-                            <th>Email</th>
-                            <th>Area</th>
-                            <th>Location</th>
-                            <th>Assigner</th>
+        <div class="clearfix"></div>
+            <div class="table-container">
+                <table class="table-responsive" id="customers2" align="right">
+                    <div class="clearfix"></div>
+                            <tbody id="table-body">
+                                <div class="clearfix"></div>
+                                <br>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Phone Number</th>
+                                    <th>Email</th>
+                                    <th>Area</th>
+                                    <th>Location</th>
+                                    <th>Assigner</th>
 
 
-                        </tr>
+                                </tr>
 
-                        <?php
-                        include '../dbconn.php';
+                                <?php
+                                include '../dbconn.php';
 
-                        $user = $_SESSION['sess_user'];
-                        // $query = "SELECT * FROM authoriser where username='" . $user . "'";
-                        $worker_flag = "SELECT id FROM worker where username ='" . $user . "'";
-                        // $result = mysqli_query($conn, $query);
-                        $result = mysqli_query($conn, $worker_flag);
+                                $user = $_SESSION['sess_user'];
+                                // $query = "SELECT * FROM authoriser where username='" . $user . "'";
+                                $worker_flag = "SELECT id FROM worker where username ='" . $user . "'";
+                                // $result = mysqli_query($conn, $query);
+                                $result = mysqli_query($conn, $worker_flag);
 
 
-                        if (mysqli_num_rows($result) == 1) {
-                            $row = mysqli_fetch_array($result);
-                            $id = $row[0];
-                            $q = "SELECT * FROM customer join service where customer.id=service.id  and (service.aflag = '" . $id . "' and service.status=  'Approved')";
-                            $res = mysqli_query($conn, $q);
-                            // Flag variable to keep track of rows echoed
-                            $rows_echoed = false;
+                                if (mysqli_num_rows($result) == 1) {
+                                    $row = mysqli_fetch_array($result);
+                                    $id = $row[0];
+                                    $q = "SELECT * FROM customer join service where customer.id=service.id  and (service.aflag = '" . $id . "' and service.status=  'Approved')";
+                                    $res = mysqli_query($conn, $q);
+                                    // Flag variable to keep track of rows echoed
+                                    $rows_echoed = false;
 
-                            if (mysqli_num_rows($res) > 0) {
-                                while ($row = mysqli_fetch_array($res)) {
-                                    if ($row[12] == '0') {
-                                        echo "<tr id='data'></tr>";
-                                        echo "<td  name='fname'>" . $row[1] . "</td>";
-                                        echo "<td  name='phone'>" . $row[3] . "</td>";
-                                        echo "<td  name='email'>" . $row[4] . "</td>";
-                                        echo "<td  name='area'>" . $row[5] . "</td>";
-                                        echo "<td  name='location'>" . $row[6] . "</td>";
-                                        echo "<td name='Assigner    '>" . $row[13] . "</td>";
-                                        // if ($row[11] == '0') {
-                                        //     echo "<td><input type='button' value='  Yes  ' onclick='val1()' style='background-color:green;color:white;border-radius:25px;'></td>";
-                                        // }
-                                        // echo "<td><input type='button' value='  No  ' onclick='val2()' style='background-color:red;color:white;border-radius:25px;'></td>";
-                                        // echo "</tr>";
-                                        $rows_echoed = true; // Set flag to true since a row has been echoed
+                                    if (mysqli_num_rows($res) > 0) {
+                                        while ($row = mysqli_fetch_array($res)) {
+                                            if ($row[12] == '0') {
+                                                echo "<tr id='data'></tr>";
+                                                echo "<td  name='fname'>" . $row[1] . "</td>";
+                                                echo "<td  name='phone'>" . $row[3] . "</td>";
+                                                echo "<td  name='email'>" . $row[4] . "</td>";
+                                                echo "<td  name='area'>" . $row[5] . "</td>";
+                                                echo "<td  name='location'>" . $row[6] . "</td>";
+                                                echo "<td name='Assigner    '>" . $row[13] . "</td>";
+                                                // if ($row[11] == '0') {
+                                                //     echo "<td><input type='button' value='  Yes  ' onclick='val1()' style='background-color:green;color:white;border-radius:25px;'></td>";
+                                                // }
+                                                // echo "<td><input type='button' value='  No  ' onclick='val2()' style='background-color:red;color:white;border-radius:25px;'></td>";
+                                                // echo "</tr>";
+                                                $rows_echoed = true; // Set flag to true since a row has been echoed
+                                            }
+                                        }
                                     }
+
+                                    // If no rows echoed, display "No Data"
+                                    if (!$rows_echoed) {
+                                        echo "<tr>";
+                                        echo "<td colspan='11'>No Data</td>";
+                                        echo "</tr>";
+                                    }
+
+                                } else {
+                                    echo "<tr>";
+                                    echo "<td colspan='11'>No Data</td>";
+                                    echo "</tr>";
                                 }
-                            }
-
-                            // If no rows echoed, display "No Data"
-                            if (!$rows_echoed) {
-                                echo "<tr>";
-                                echo "<td colspan='11'>No Data</td>";
-                                echo "</tr>";
-                            }
-
-                        } else {
-                            echo "<tr>";
-                            echo "<td colspan='11'>No Data</td>";
-                            echo "</tr>";
-                        }
-                        ?>
-
-                    </table>
+                                ?>
+                            </tbody>
+                        </table>
+                        
+                    </div>
                 </div>
+                <div class="clearfix"></div>
+
             </div>
-            <div class="clearfix"></div>
-
         </div>
-    </div>
 
-    <script type="text/javascript">
-        function val1() {
-            var tableData;
-            $("tr").click(function () {
-                tableData = $(this).children("td").map(function () {
-                    return $(this).text();
-                }).get();
-
-
-                tableData = JSON.stringify(tableData);
-
-                window.location.href = 'approved.php';
-            });
+        <script type="text/javascript">
+            function val1() {
+                var tableData;
+                $("tr").click(function () {
+                    tableData = $(this).children("td").map(function () {
+                        return $(this).text();
+                    }).get();
 
 
-        }
+                    tableData = JSON.stringify(tableData);
+
+                    window.location.href = 'approved.php';
+                });
+
+
+            }
 
 
 
-        function val2() {
-            var tableData;
-            $("tr").click(function () {
-                tableData = $(this).children("td").map(function () {
-                    return $(this).text();
-                }).get();
+            function val2() {
+                var tableData;
+                $("tr").click(function () {
+                    tableData = $(this).children("td").map(function () {
+                        return $(this).text();
+                    }).get();
 
-                window.location.href = 'decline.php';
-            });
-        }
+                    window.location.href = 'decline.php';
+                });
+            }
 
 
-        // function refreshTable() {
-        //     $.ajax({
-        //         url: 'application.php', // Path to the script that retrieves updated data
-        //         type: 'POST',
-        //         success: function (data) {
-        //             $('#data').html(data); // Update the table with the new data
-        //         }
-        //     });
-        // }
+            // function refreshTable() {
+            //     $.ajax({
+            //         url: 'application.php', // Path to the script that retrieves updated data
+            //         type: 'POST',
+            //         success: function (data) {
+            //             $('#data').html(data); // Update the table with the new data
+            //         }
+            //     });
+            // }
 
-        // $(document).ready(function () {
-        //     setInterval(refreshTable, 1000); // Refresh the table every second (1000 milliseconds)
-        // });
+            // $(document).ready(function () {
+            //     setInterval(refreshTable, 1000); // Refresh the table every second (1000 milliseconds)
+            // });
 
-    </script>
-
+        </script>
+ <?php include '../include/footer.php'; ?>
 
 </body>
 

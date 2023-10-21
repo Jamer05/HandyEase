@@ -105,7 +105,7 @@ if (!isset($_SESSION['sess_user'])) {
                             <input type="text" id="fname">
                         </div>
                         <div class="wow fadeInLeft" data-wow-delay="0.4s">
-                            <span>Last Name<label>*</label></span>
+                            <span>Nick Name<label>*</label></span>
                             <input type="text" id="lname">
                         </div>
 

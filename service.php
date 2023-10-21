@@ -65,82 +65,14 @@ if (!isset($_SESSION['username'])) {
       </div>
    </div>
    </div>
+
    <div class="main">
       <div class="container">
-         <div class="register">
-            <form action="addcus.php" method="post">
-               <div class="register-top-grid">
-                  <h3>BOOK APPOINTMENT</h3>
-                  <div class="wow fadeInLeft" data-wow-delay="0.4s">
-                     <span>Id<label>*</label></span>
-                     <input type="text" name="Id" id="cusid" readonly>
-                  </div>
-                  <div class="wow fadeInLeft" data-wow-delay="0.4s">
-                     <span>Username<label>*</label></span>
-                     <input type="text" name="Username" id="uname" readonly>
-                  </div>
-                  <div class="wow fadeInLeft" data-wow-delay="0.4s">
-                     <span>Display Name<label>*</label></span>
-                     <input type="text" name="Name" id = "displayName" pattern="^[a-zA-Z'. -]+$">
-                  </div>
-                  
-                  <div class="wow fadeInRight" data-wow-delay="0.4s">
-                     <span>Email Address <label>*</label></span>
-                     <input type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
-                  </div>
-                  <div class="wow fadeInRight" data-wow-delay="0.4s">
-                     <span>Locality<label>*</label></span>
-                     <select name="locality">
-                        <option value="Nueva Ecija">Nueva Ecija</option>
-                     </select>
-                  </div>
+            <h3>CHOOSE SERVICE</h3>
+         <br> <br>
+            <?php include 'serviceList.php' ?>
 
-                  <div class="wow fadeInRight" data-wow-delay="0.4s">
-                     <span>City<label>*</label></span>
-                     <select name="city">
-                        <option value="Sumacab">Sumacab</option>
-                        <option value="Palayan City">Palayan City</option>
-                        <option value="Gapan City">Gapan City</option>
-                        <option value="San Jose City">San Jose City</option>
-                        <option value="San Antonio">San Antonio</option>
-                     </select>
-                  </div>
-                  <div class="wow fadeInLeft" data-wow-delay="0.4s">
-                     <span>Complete Address<label>*</label></span>
-                     <input type="text" name="bar_street"">
-                  </div>
-                  <div class=" wow fadeInRight" data-wow-delay="0.4s">
-                     <span>Phone number<label>*</label></span>
-                     <input type="text" name="phone" pattern="^(09|\+639)\d{9}$">
-                  </div>
-                  <div class="wow fadeInRight" data-wow-delay="0.4s">
-                     <span>Service<label>*</label></span>
-                     <select name="selser">
-                        <option value="Plumber">Plumber - Php 1000</option>
-                        <option value="Electrician">Electrician - Php 1000 </option>
-                        <option value="Carpenter">Carpenter - Php 800</option>
-                        <option value="Washing Machine">Washing Machine - Php 800</option>
-                        <option value="AC and Refrigerator">AC & Refrigerator - Php 650</option>
-                     </select>
-                  </div>
-                  <div class="wow fadeInLeft" data-wow-delay="0.4s">
-                     <span>Additional Information<label>*</label></span>
-            `         <input type="text" name="Information" pattern="^[a-zA-Z'. -]+$">
-                  </div>
-               </div>
-               <div class="clearfix"> </div>
-               <div class="clearfix"> </div>
-               <div class="register-but">
-                  <input type="submit" value="Submit">
-                  <br>
-                  <br>
-                  <br>
-                  <br>
-                  <!-- nbsp -->
-                  
-               </div>
-               <div class="clearfix"> </div>
-            </form>
+            </div>
          </div>
       </div>
    </div>
@@ -170,7 +102,6 @@ if (!isset($_SESSION['username'])) {
       str += str1;
       document.getElementById("cusid").value = str;
       document.getElementById("uname").value = username;
-      document.getElementById("displayName").value = username;
    </script>
 
    <!-- footer-section-ends -->
@@ -184,6 +115,10 @@ if (!isset($_SESSION['username'])) {
    </script>
    <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
    <?php include 'include/footer.php'; ?>
+   <!-- make the footer fixed in position  below-->
+   <style>
+
+   </style>
    <script>
       // var my_handlers = {
       //    fill_provinces: function () {
@@ -214,6 +149,7 @@ if (!isset($_SESSION['username'])) {
       // });
 
    </script>
+
 </body>
 
 </html>

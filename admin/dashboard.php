@@ -82,6 +82,7 @@ include '../include/session.php';
                             </div>
                         </li>|
                         <li><a class="active" href="finance.php">Finance</a></li>|
+                        <li><a class="active" href="add_service.php">Add Service</a></li>|
 
                         <div class="clearfix"></div>
                     </ul>
@@ -167,7 +168,7 @@ include '../include/session.php';
         </div>
         <div class="container">
             <div class="card">
-                <h2>Pending</h2>
+                <h2>Pending/Pending Transaction</h2>
                 <?php
                 // Fetch complete customers from service table
                 $sql = "SELECT COUNT(*) as pending_customers FROM service WHERE transflag = 0";

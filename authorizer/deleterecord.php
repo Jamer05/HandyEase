@@ -10,7 +10,7 @@ $id = $rowdata[0];
 // Instead of deleting, we will update the status in the database
 $query = "UPDATE service SET status = 'Hidden' WHERE id='" . $id . "'";
 if (mysqli_query($conn, $query)) {
-	echo "<script>alert('Hidden Successfully');
+	echo "<script>alert('ARCHIVE Successfully');
 	window.location.href='application.php';</script>";
 } else {
 	echo "<script>alert('Failed to Hide');

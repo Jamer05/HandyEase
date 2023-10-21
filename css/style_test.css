@@ -660,6 +660,41 @@ div.register-bottom-grid {
     color: white;
     font-size: 1.2em;
 }
+/* Apply some basic styles to the table */
+#customers3 {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* Style the #customers3 header */
+#customers3 th {
+    background-color: #f2f2f2;
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+/* Style the #customers3 data rows */
+#customers3 td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+/* Add some responsive styles */
+@media screen and (max-width: 768px) {
+    /* Make the #customers3 header cells stack on top of each other */
+    #customers3 thead {
+        display: none;
+    }
+
+    /* Style the #customers3 data cells for smaller screens */
+    #customers3 td {
+        display: block;
+        text-align: left;
+    }
+}
+
 #noDataRow {
 	display: none; /* Hide by default */
 }

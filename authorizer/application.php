@@ -84,8 +84,7 @@ if (!isset($_SESSION['sess_user'])) {
         <div class="content">
             <div class="container">
                 <div class="clearfix"></div>
-                <div class="wow fadeInDownBig" data-wow-delay="0.4s">
-
+            
                     <div class="table-responsive">
 
                         <table id="customers2" align="right">
@@ -102,7 +101,7 @@ if (!isset($_SESSION['sess_user'])) {
                                 <th>Request</th>
                                 <th>Worker</th>
                                 <th>Transaction</th>
-                                <th>Delete</th>
+                                <th>Archive</th>
                             </tr>
 
                             <?php
@@ -143,7 +142,7 @@ if (!isset($_SESSION['sess_user'])) {
                                             if ($row[12] == 0) {
                                                 echo "<td><input type='button' value='Enter' id = 'button'  onclick='val2()' style='background-color:green;color:white;border-radius:25px;'></td>";
                                             }
-                                            echo "<td><input type='button' value='Delete'  id = 'button'  onclick='val3()' style='background-color:red;color:white;border-radius:25px;'></td>";
+                                            echo "<td><input type='button' value='Archive'  id = 'button'  onclick='val3()' style='background-color:red;color:white;border-radius:25px;'></td>";
                                             echo "</tr>";
                                             $rows_echoed = true; // Set flag to true since a row has been echoed
                                         }
@@ -233,7 +232,7 @@ if (!isset($_SESSION['sess_user'])) {
 
         </script>
 
-
+<?php include '../include/footer.php'; ?>
 </body>
 
 </html>

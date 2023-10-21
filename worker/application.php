@@ -12,7 +12,7 @@ if (!isset($_SESSION['sess_user'])) {
     <title>HandyEase</title>
     <link href="../css/bootstrap.css" rel='stylesheet' type='text/css' />
     <script src="../js/jquery.min.js"></script>
-    <link href="../css/style_me.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../css/style_client.css" rel="stylesheet" type="text/css" media="all" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="application/x-javascript">
     addEventListener("load", function() {
@@ -82,8 +82,8 @@ if (!isset($_SESSION['sess_user'])) {
         <div class="container">
             <div class="scrollme">
                 <div class="wow fadeInDownBig" data-wow-delay="0.4s">
-                    <div class="table-responsive">
-                        <table id="customers2" align="right">
+                    
+                        <table id="customers2" class="table-responsive" align="right">
                             <div class="clearfix"></div>
                             <br>
                             <tr>
@@ -151,7 +151,7 @@ if (!isset($_SESSION['sess_user'])) {
                             ?>
 
                         </table>
-                    </div>
+                   
                 </div>
 
             </div>
@@ -204,7 +204,7 @@ if (!isset($_SESSION['sess_user'])) {
         // });
 
     </script>
-
+ <?php include '../include/footer.php'; ?>
 
 </body>
 
