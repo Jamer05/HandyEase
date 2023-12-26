@@ -129,11 +129,12 @@ if (!isset($_SESSION['sess_user'])) {
                         }
                     }
                     ?>
+                     <br>
                 </table>
             </div>
         </div>
         <div class="clearfix"></div>
-
 </body>
-
+<br>
+<br>
 </html>

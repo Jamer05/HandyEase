@@ -186,10 +186,22 @@
 		<div class="ordering-section" id="Order">
 			<div class="container">
 				<div class="ordering-section-head text-center wow bounceInRight" data-wow-delay="0.4s">
-					<h3>Home Repair Service was never so easy</h3>
+					<h3>Home Repair Service at your Doorstep, just book a request now! </h3>
+					<hr>
+					<br>
+					<h3>Our Purpose</h3>
+					<p>
+						HandyEase is your one-stop solution for all home repair and maintenance needs. We provide
+						efficient and
+						reliable services to make home repairs easy and hassle-free. Our mission is to connect customers
+						with
+						skilled workers for a seamless home service experience.
+					</p>
 					<div class="dotted-line">
 						<h4>Just 4 steps to follow </h4>
+						<hr>
 					</div>
+
 				</div>
 
 				<div class="ordering-section-grids">
@@ -204,6 +216,7 @@
 								<label></label>
 							</div>
 						</div>
+
 
 						<div class="col-md-3 ordering-section-grid">
 							<div class="ordering-section-grid-process wow fadeInRight" data-wow-delay="0.4s">
@@ -310,13 +323,23 @@
 			</div>
 		</div>
 	</div>
+	<div class="ordering-section-head text-center wow bounceInRight" data-wow-delay="0.4s">
 
+
+		<hr>
+		<hr>
+		<!-- margin left and right to fit it in -->
+	</div>
+
+	</div>
 	<div class="footer">
 		<div class="container">
-			<p class="wow fadeInLeft" data-wow-delay="0.4s">&copy; Designed by &nbsp;<a href="team/index.html">OMSIM
-					BARABIDA</a></p>
+			<p class="wow fadeInLeft" data-wow-delay="0.4s">
+				&copy; Designed by &nbsp;<a href="team/index.html">OMSIM BARABIDA</a><br>
+				<strong>Contact:</strong> info@handyease.com | Phone: +639777325694
 		</div>
 	</div>
+
 	<!-- footer-section-ends -->
 	<script type="text/javascript">
 		$(document).ready(function () {

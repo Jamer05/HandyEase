@@ -1,0 +1,28 @@
+/* print_friendly.css */
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#customers1 {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#customers1 th, #customers1 td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#customers1 th {
+    background-color: #f2f2f2;
+}
+
+/* Add other print-friendly styles here */

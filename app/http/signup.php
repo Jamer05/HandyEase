@@ -2,7 +2,8 @@
 
 # check if username, password, name submitted
 if(isset($_POST['username']) &&
-   isset($_POST['password']) &&
+   isset($_POST['password'])&&
+   isset($_POST['email']) &&
    isset($_POST['name'])){
 
    # database connection file
@@ -11,6 +12,7 @@ if(isset($_POST['username']) &&
    # get data from POST request and store them in var
    $name = $_POST['name'];
    $password = $_POST['password'];
+   $email = $_POST['email'];
    $username = $_POST['username'];
 
    # making URL data format
@@ -44,7 +46,18 @@ if(isset($_POST['username']) &&
       */
    	  header("Location: ../../signup.php?error=$em&$data");
    	  exit;
-   }else {
+   }else if(empty($email)){
+	   	  # error message
+   	  $em = "Email is required";
+
+   	  /*
+		redirect to 'signup.php' and 
+		passing error message and data
+	  */
+   	  header("Location: ../../signup.php?error=$em&$data");
+   	  exit;
+   }
+   else {
    	  # checking the database if the username is taken
    	  $sql = "SELECT username 
    	          FROM users
@@ -122,10 +135,10 @@ if(isset($_POST['username']) &&
       	}else {
             # inserting data into database
             $sql = "INSERT INTO users
-                    (name, username, password)
-                    VALUES (?,?,?)";
+                    (name, username, password,email)
+                    VALUES (?,?,?,?)";
             $stmt = $conn->prepare($sql);
-            $stmt->execute([$name, $username, $password]);
+            $stmt->execute([$name, $username, $password,$email]);
       	}
 
       	# success message

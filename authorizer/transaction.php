@@ -126,13 +126,9 @@ if (!isset($_SESSION['sess_user'])) {
                             </div>
                             <div class="wow fadeInLeft" data-wow-delay="0.4s">
                                 <span>Transaction Amount<label>*</label></span>
-                                <select name="amount">
-                                    <option value="1000" selected>Plumber - Php 1000</option>
-                                    <option value="1000">Electrician - Php 1000 </option>
-                                    <option value="800">Carpenter - Php 800</option>
-                                    <option value="800">Washing Machine - Php 800</option>
-                                    <option value="650">AC & Refrigerator - Php 650</option>
-                                </select>
+                                <!-- input number only disable letters -->
+                                <input type="number" name="amount" id="tamount" onkeypress="return isNumberKey(event)"
+                                    oninput="maxLengthCheck(this)" maxlength="10" required>
                             </div>
 
                             <div class="wow fadeInLeft" data-wow-delay="0.4s">
@@ -201,8 +197,8 @@ if (!isset($_SESSION['sess_user'])) {
     $result = mysqli_query($conn, $q);
     $row = mysqli_fetch_array($result);
 
-    $payee = $row[14] . " " . $row[15];
-    $authorizer = $row[3];
+    $payee = $row[14] . " (" . $row[15]. ") ";
+    $authorizer = $row[1];
 
     ?>
     <script type="text/javascript">

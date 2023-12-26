@@ -57,8 +57,8 @@ if (count($errors) == 0) {
 	$query = mysqli_prepare($conn, "INSERT INTO worker (id, firstname, lastname, username, password, phone, profession, authid, area, location, adminuser, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 	mysqli_stmt_bind_param($query, 'ssssssssssss', $id, $fname, $lname, $username, $hashedPassword, $phone, $request, $authid, $area, $location, $adminuser, $email);
 
-	$query_chat = mysqli_prepare($conn, "INSERT INTO users (name, username, password, staff) VALUES (?, ?, ?, ?)");
-	mysqli_stmt_bind_param($query_chat, 'ssss', $fname, $username, $hashedPassword, $staff);
+	$query_chat = mysqli_prepare($conn, "INSERT INTO users (name, username, password, staff,email) VALUES (?,?, ?, ?, ?)");
+	mysqli_stmt_bind_param($query_chat, 'sssss', $fname, $username, $hashedPassword, $staff,$email);
 
 	if (mysqli_stmt_execute($query) && mysqli_stmt_execute($query_chat)) {
 		include '../include/success.php';

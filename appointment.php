@@ -95,9 +95,10 @@ if (!isset($_SESSION['username'])) {
             <div class="top-menu">
                 <ul>
 
-                    <li><a href="customer.php">Book</a></li>
+                <li><a href="customer.php">Book</a></li>
                     <li><a href="chat_real.php">Chat</a></li>
                     <li><a href="appointment.php">Updates</a></li>
+                    <li><a href="completed.php">Completed</a></li>
                     <li><a href="logout.php">Signout</a></li>
                     <div class="clearfix"></div>
 
@@ -121,11 +122,12 @@ if (!isset($_SESSION['username'])) {
                         <thread>
                             <br>
                             <tr>
-                                <th>Customer ID</th>
+                                <th>Reference ID</th>
                                 <th>Customer</th>
                                 <th>Request</th>
                                 <th>Date</th>
                                 <th>Status</th>
+                                <th>Checkup Price</th>
                                 <th>Worker</th>
                                 <th>Cancel</th>
 
@@ -167,8 +169,9 @@ if (!isset($_SESSION['username'])) {
                                         echo "<td  name='Request'>" . $row[2] . "</td>";
                                         echo "<td  name='Date'>" . $row[3] . "</td>";
                                         echo "<td  name='Status'>" . $row[7] . "</td>";
+                                        echo "<td  name='Price'>₱" . $row[8] . "</td>";
 
-                                        echo "<td name='Worker'>" . ($row[16] != '' ? $row[16] : 'Ongoing') . "</td>";
+                                        echo "<td name='Worker'>" . ($row[22] != '' ? $row[22] : 'Ongoing') . "</td>";
                                         if ($row[7] == "Pending" || $row[7] == "Ongoing") {
                                             echo "<td><input type='button' value='Cancel'  id = 'button'  onclick='val3()' style='background-color:red;color:white;border-radius:25px;'></td>";
                                             echo "</tr>";
@@ -205,23 +208,23 @@ if (!isset($_SESSION['username'])) {
     </div>
     <script>
 
-        function refreshTable() {
-            $.ajax({
-                url: 'appointment.php', // Path to the script that retrieves updated data
-                type: 'POST',
-                success: function (data) {
-                    // Create a new table row with the received data
-                    var newRow = $("<tr>").html(data);
+        // function refreshTable() {
+        //     $.ajax({
+        //         url: 'appointment.php', // Path to the script that retrieves updated data
+        //         type: 'POST',
+        //         success: function (data) {
+        //             // Create a new table row with the received data
+        //             var newRow = $("<tr>").html(data);
 
-                    // Append the new row to the existing tbody
-                    $('#table-body').append(newRow);
-                }
-            });
-        }
+        //             // Append the new row to the existing tbody
+        //             $('#table-body').append(newRow);
+        //         }
+        //     });
+        // }
 
-        $(document).ready(function () {
-            setInterval(refreshTable, 1000); // Refresh the table every second (1000 milliseconds)
-        });
+        // $(document).ready(function () {
+        //     setInterval(refreshTable, 1000); // Refresh the table every second (1000 milliseconds)
+        // });
 
         function val3() {
             var tableData1;

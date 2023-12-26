@@ -57,6 +57,7 @@ if (!isset($_SESSION['username'])) {
                <li><a href="customer.php">Book</a></li>
                <li><a href="chat_real.php">Chat</a></li>
                <li><a href="appointment.php">Updates</a></li>
+               <li><a href="completed.php">Completed</a></li>
                <li><a href="logout.php">Signout</a></li>
                <div class="clearfix"></div>
             </ul>
@@ -81,9 +82,9 @@ if (!isset($_SESSION['username'])) {
                   </div>
                   <div class="wow fadeInLeft" data-wow-delay="0.4s">
                      <span>Display Name<label>*</label></span>
-                     <input type="text" name="Name" id = "displayName" pattern="^[a-zA-Z'. -]+$">
+                     <input type="text" name="Name" id="displayName" pattern="^[a-zA-Z'. -]+$">
                   </div>
-                  
+
                   <div class="wow fadeInRight" data-wow-delay="0.4s">
                      <span>Email Address <label>*</label></span>
                      <input type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
@@ -125,7 +126,7 @@ if (!isset($_SESSION['username'])) {
                   </div>
                   <div class="wow fadeInLeft" data-wow-delay="0.4s">
                      <span>Additional Information<label>*</label></span>
-            `         <input type="text" name="Information" pattern="^[a-zA-Z'. -]+$">
+                     ` <input type="text" name="Information" pattern="^[a-zA-Z'. -]+$">
                   </div>
                </div>
                <div class="clearfix"> </div>
@@ -137,7 +138,7 @@ if (!isset($_SESSION['username'])) {
                   <br>
                   <br>
                   <!-- nbsp -->
-                  
+
                </div>
                <div class="clearfix"> </div>
             </form>

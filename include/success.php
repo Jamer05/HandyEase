@@ -37,6 +37,18 @@
 				}
 			});
 		}
+		function addedFeedback() {
+			Swal.fire({
+				title: 'Succesfully Added',
+				text: 'Well done!',
+				icon: 'success',
+				confirmButtonText: 'Continue'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					window.location.href = "completed.php";
+				}
+			});
+		}
 	</script>
 	<script>
 		function assign() {

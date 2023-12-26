@@ -47,11 +47,40 @@
 				confirmButtonText: 'Continue'
 			}).then((result) => {
 				if (result.isConfirmed) {
-					window.location.href = "customer.php";
+					window.history.back();
 				}
 			});
 		}
 	</script>
+	<script>
+		function decline() {
+			Swal.fire({
+				title: 'Request Declined!',
+				text: 'Due to specific Reason',
+				icon: 'danger',
+				confirmButtonText: 'Continue'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					window.history.back();
+				}
+			});
+		}
+	</script>
+	<script>
+		function notAvailable() {
+			Swal.fire({
+				title: 'Sorry no available workers at this time!',
+				text: 'Due to specific Reason',
+				icon: 'danger',
+				confirmButtonText: 'Continue'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					window.history.back();
+				}
+			});
+		}
+	</script>
+
 	<script>
 		function unavailableService() {
 			Swal.fire({

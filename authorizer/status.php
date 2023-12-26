@@ -139,7 +139,11 @@ if (!isset($_SESSION['sess_user'])) {
                             <?php
                             echo "<select id='worker' name='worker' onchange=val()>";
                             echo "<option value='None'>None</option>";
-                            $query = "SELECT * FROM worker join authoriser where worker.authid=authoriser.id and authoriser.username='" . $_SESSION['sess_user'] . "'";
+                            $query = "SELECT * FROM worker 
+                            JOIN authoriser ON worker.authid = authoriser.id 
+                            WHERE authoriser.username = '" . $_SESSION['sess_user'] . "' 
+                            AND worker.active = 1";  // Add this condition
+                  
                             $result = mysqli_query($conn, $query);
                           
                             while ($row = mysqli_fetch_array($result)) {

@@ -151,7 +151,7 @@ include '../include/session.php';
                                     <label>*
                                     </label>
                                 </span>
-                                <input type="text" name="pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                <input type="password" name="pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                                     title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
                             </div>
                             <div class="wow fadeInRight" data-wow-delay="0.4s">
@@ -248,7 +248,6 @@ include '../include/session.php';
         document.getElementById("authid").value = str;
     </script>
 
-    <?php include '../include/footer.php'; ?>
 </body>
 
 </html>

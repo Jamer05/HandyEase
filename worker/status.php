@@ -4,6 +4,7 @@ session_start();
 if (!isset($_SESSION['sess_user'])) {
     header('Location:authorizer.php');
 }
+$currentPage = basename($_SERVER['PHP_SELF']);
 ?>
 
 <!DOCTYPE html>

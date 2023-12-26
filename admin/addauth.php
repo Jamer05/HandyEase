@@ -17,7 +17,7 @@ if (isset($_POST['sub'])) {
     $filename = explode(".", $file);
     $actual_filename = $filename[0];
     $extension = $filename[1];
-    $allowed_type = array("jpg", "jpeg");
+    $allowed_type = array("jpg", "jpeg", "png","JPG");
     // form validation: ensure that the form is correctly filled
     //use the alert function
 

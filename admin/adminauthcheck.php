@@ -46,6 +46,18 @@ if (!isset($_SESSION['sess'])) {
         });
     </script>
     <script src="../js/simpleCart.min.js"> </script>
+
+    <style>
+        .footer {
+            padding: 3em 0;
+            background-color: #000;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
 <body>
@@ -83,15 +95,15 @@ if (!isset($_SESSION['sess'])) {
                         <li><a class="active" href="finance.php">Finance</a></li>
                         |
                         &nbsp;&nbsp;
-                        <input type="text" id="searchInput" placeholder="Search...">
+                        <!-- <input type="text" id="searchInput" placeholder="Search..."> -->
 
                     </ul>
                 </div>
                 <div class="login-section">
                     <ul>
-                        <li><a class="active" href="#">Welcome
-                                <?php echo $_SESSION['sess']; ?>
-                            </a></li>
+                        <li>Welcome
+                            <?php echo $_SESSION['sess']; ?>
+                        </li>
                         <li><a class="active" href="adminlogout.php">Logout</a></li>|
                         <li><a href="#"></a> </li>
                     </ul>
@@ -118,7 +130,7 @@ if (!isset($_SESSION['sess'])) {
                                             ?>
                                             <div class="col-md-4">
                                                 <div class="card"
-                                                    style="width: 30rem; background: #fff; border:3px solid green; border-radius:25px; background-color:black; color: white;">
+                                                    style="width: 30rem; background: #fff; border:3px solid green; border-radius:25px; background-color:white; color: black;">
                                                     <img class='card-img-top' src='<?php echo $row[12]; ?>'
                                                         style='width: 180px; height: 180px; border-radius:50%;'>
 
@@ -231,7 +243,14 @@ if (!isset($_SESSION['sess'])) {
         input.style.color = "black";
     </script>
     <br><br>
-    <?php include '../include/footer.php'; ?>
+    <div class="footer">
+        <div class="container">
+            <p class="wow fadeInLeft" data-wow-delay="0.4s">
+                &copy; Designed by &nbsp;<a href="team/index.html">OMSIM BARABIDA</a><br>
+                <strong>Contact:</strong> info@handyease.com | Phone: +639777325694
+            </p>
+        </div>
+    </div>
 </body>
 
 </html>

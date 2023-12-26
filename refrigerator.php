@@ -4,6 +4,7 @@ error_reporting(0);
 if (!isset($_SESSION['username'])) {
    header('Location:index.php');
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +29,7 @@ if (!isset($_SESSION['username'])) {
       new WOW().init();
    </script>
    <script type="text/javascript" src="js/move-top.js"></script>
-   <script type="text/javascript" src="js/easing.js"></script>
+   <script type="text/javascript" src="js/easings.js"></script>
    <script type="text/javascript">
       jQuery(document).ready(function ($) {
          $(".scroll").click(function (event) {
@@ -55,10 +56,11 @@ if (!isset($_SESSION['username'])) {
       <div class="container">
          <div class="top-menu">
             <ul>
-               <li><a href="customer.php">Book</a></li>
-               <li><a href="chat_real.php">Chat</a></li>
-               <li><a href="appointment.php">Updates</a></li>
-               <li><a href="logout.php">Signout</a></li>
+            <li><a href="customer.php">Book</a></li>
+                    <li><a href="chat_real.php">Chat</a></li>
+                    <li><a href="appointment.php">Updates</a></li>
+                    <li><a href="completed.php">Completed</a></li>
+                    <li><a href="logout.php">Signout</a></li>
                <div class="clearfix"></div>
             </ul>
          </div>
@@ -85,10 +87,13 @@ if (!isset($_SESSION['username'])) {
                      <input type="text" name="Name" id="displayName" pattern="^[a-zA-Z'. -]+$">
                   </div>
 
+
                   <div class="wow fadeInRight" data-wow-delay="0.4s">
                      <span>Email Address <label>*</label></span>
-                     <input type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                     <input type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}"
+                        value="<?php include 'get_email.php'; ?>">
                   </div>
+
                   <div class="wow fadeInRight" data-wow-delay="0.4s">
                      <span>Locality<label>*</label></span>
                      <select name="locality">
@@ -121,8 +126,23 @@ if (!isset($_SESSION['username'])) {
                      </select>
                   </div>
                   <div class="wow fadeInRight" data-wow-delay="0.4s">
+                     <span>Brand<label>*</label></span>
+                     <select name="selbrand">
+                        <option value="">Select Brand</option>
+                        <option value="LG">LG</option>
+                        <!-- change some refrigerator brand -->
+                        <option value="Samsung">Samsung</option>
+                        <option value="Whirlpool">Whirlpool</option>
+                        <option value="Panasonic">Panasonic</option>
+                        <option value="Haier">Haier</option>
+                        <option value="Sharp">Sharp</option>
+                        <option value="Toshiba">Toshiba</option>
+                     </select>
+                  </div>
+                  <div class="wow fadeInRight" data-wow-delay="0.4s">
                      <span>Device type<label>*</label></span>
                      <select name="seltype">
+                        <option value="">Select Device Type</option>
                         <option value="Single Door">Single Door</option>
                         <option value="Two Door Top Freezer">Two Door Top Freezer</option>
                         <option value="Multi Door-Shelves">Multi Door-Shelves</option>
@@ -130,16 +150,29 @@ if (!isset($_SESSION['username'])) {
                         <option value="Single Door Commercial">Single Door Commercial</option>
                      </select>
                   </div>
-
+                  <div class="wow fadeInRight" data-wow-delay="0.4s">
+                     <span>Technology<label>*</label></span>
+                     <select name="seltech">
+                        <option value="">Select Device Technology</option>
+                        <option value="Inverter">Inverter</option>
+                        <option value="Non-Inverter">Non-Inverter</option>
+                        <!-- remove the default option -->
+                     </select>
+                  </div>
                   <div class="wow fadeInLeft" data-wow-delay="0.4s">
-                     <span>Additional Information<label>*</label></span>
-                     <input type="text" name="Information" pattern="^[a-zA-Z'. -]+$">
+                     <span>Additional Information(Issue)<label>*</label></span>
+                     <input type="text" name="information" pattern="^[a-zA-Z'. -]+$">
                   </div>
 
                   <!-- Add button that will show the price and details -->
                   <button type="button" class="btn btn-default" id="showDetailsBtn">Show Pricing</button>
                   <!-- It should be show here -->
                   <div id="dynamicDetails"></div>
+                  <input type="hidden" name="checkup" id="checkup_fee" value="">
+                  <input type="hidden" name="types" id="types" value="">
+                  <input type="hidden" name="brand" id="brand" value="">
+                  <input type="hidden" name="technology" id="technology" value="">
+                  <div id="error" style="color: red;"></div>
 
                </div>
                <div class="clearfix"> </div>
@@ -179,52 +212,164 @@ if (!isset($_SESSION['username'])) {
       document.getElementById("cusid").value = str;
       document.getElementById("uname").value = username;
       document.getElementById("displayName").value = username;
+
    </script>
 
-<!-- Add button that will show the price and details -->
-<button type="button" class="btn btn-default" id="showDetailsBtn">Show details</button>
-<!-- It should be shown here -->
-<div id="dynamicDetails"></div>
+   <!-- Add button that will show the price and details -->
+   <button type="button" class="btn btn-default" id="showDetailsBtn">Show details</button>
+   <!-- It should be shown here -->
+   <div id="dynamicDetails"></div>
 
-<script>
-   // Get references to the select elements
-   const serviceSelect = document.querySelector('select[name="selser"]');
-   const deviceTypeSelect = document.querySelector('select[name="seltype"]');
+   <script>
+      // Get references to the select elements
+      const serviceSelect = document.querySelector('select[name="selser"]');
+      const deviceTypeSelect = document.querySelector('select[name="seltype"]');
+      const brandSelect = document.querySelector('select[name="selbrand"]');
+      const technologySelect = document.querySelector('select[name="seltech"]');
 
-   // Get references to the container and button
-   const dynamicDetailsContainer = document.getElementById('dynamicDetails');
-   const showDetailsBtn = document.getElementById('showDetailsBtn');
+      // Get references to the container and button
+      const dynamicDetailsContainer = document.getElementById('dynamicDetails');
+      const showDetailsBtn = document.getElementById('showDetailsBtn');
 
-   // Define pricing for each type of refrigerator (in Philippine Pesos)
-   const devicePricing = {
-      "Single Door": "₱395",
-      "Two Door Top Freezer": "₱450",
-      "Multi Door-Shelves": "₱500",
-      "Chest Freezer": "₱400",
-      "Single Door Commercial": "₱550"
-      // Add more types and prices as needed
-   };
+      // Define pricing for each combination of brand, device type, and technology (in Philippine Pesos)
+      const devicePricing = {
+         "LG": {
+            "Inverter": {
+               "Single Door": "395",
+               "Two Door Top Freezer": "450",
+               "Multi Door-Shelves": "500",
+               "Chest Freezer": "400",
+               "Single Door Commercial": "550"
+            },
+            "Non-Inverter": {
+               "Single Door": "350",
+               "Two Door Top Freezer": "400",
+               "Multi Door-Shelves": "450",
+               "Chest Freezer": "350",
+               "Single Door Commercial": "500"
+            }
+         },
+         "Samsung": {
+            "Inverter": {
+               "Single Door": "410",
+               "Two Door Top Freezer": "470",
+               "Multi Door-Shelves": "520",
+               "Chest Freezer": "420",
+               "Single Door Commercial": "570"
+            },
+            "Non-Inverter": {
+               "Single Door": "360",
+               "Two Door Top Freezer": "410",
+               "Multi Door-Shelves": "460",
+               "Chest Freezer": "360",
+               "Single Door Commercial": "510"
+            }
+         },
+         "Whirlpool": {
+            "Inverter": {
+               "Single Door": "420",
+               "Two Door Top Freezer": "480",
+               "Multi Door-Shelves": "530",
+               "Chest Freezer": "430",
+               "Single Door Commercial": "580"
+            },
+            "Non-Inverter": {
+               "Single Door": "370",
+               "Two Door Top Freezer": "420",
+               "Multi Door-Shelves": "470",
+               "Chest Freezer": "370",
+               "Single Door Commercial": "520"
+            }
+         },
+         "Panasonic": {
+            "Inverter": {
+               "Single Door": "430",
+               "Two Door Top Freezer": "490",
+               "Multi Door-Shelves": "540",
+               "Chest Freezer": "440",
+               "Single Door Commercial": "590"
+            },
+            "Non-Inverter": {
+               "Single Door": "380",
+               "Two Door Top Freezer": "430",
+               "Multi Door-Shelves": "480",
+               "Chest Freezer": "380",
+               "Single Door Commercial": "530"
+            }
+         },
+         "Toshiba": {
+            "Inverter": {
+               "Single Door": "440",
+               "Two Door Top Freezer": "500",
+               "Multi Door-Shelves": "550",
+               "Chest Freezer": "450",
+               "Single Door Commercial": "600"
+            },
+            "Non-Inverter": {
+               "Single Door": "390",
+               "Two Door Top Freezer": "440",
+               "Multi Door-Shelves": "490",
+               "Chest Freezer": "390",
+               "Single Door Commercial": "540"
+            }
+         },
 
-   // Add an event listener to the "Show details" button
-   showDetailsBtn.addEventListener('click', function () {
-      // Get the selected service and device type
-      const selectedService = serviceSelect.value;
-      const selectedDeviceType = deviceTypeSelect.value;
 
-      // Get the price based on the selected device type
-      const selectedDevicePrice = devicePricing[selectedDeviceType];
+         // Define prices for other brands, device types, and technologies
+      };
 
-      // Generate the dynamic content
-      const dynamicContent = `
-         <p>Device: ${selectedService}</p>
-         <p>Device Type: ${selectedDeviceType}</p>
-         <p name ="price" >Check Up Fee: <span style="color: red;">${selectedDevicePrice} Per Unit</span></p>
-      `;
+      // Add an event listener to the "Show details" button
+      showDetailsBtn.addEventListener('click', function () {
+         // Get the selected service, brand, device type, and technology
+         const selectedService = serviceSelect.value;
+         const selectedBrand = brandSelect.value;
+         const selectedDeviceType = deviceTypeSelect.value;
+         const selectedTechnology = technologySelect.value;
 
-      // Update the container with the dynamic content
-      dynamicDetailsContainer.innerHTML = dynamicContent;
-   });
-</script>
+         // Check if any of the dropdowns is empty
+         if (!selectedService || !selectedBrand || !selectedDeviceType || !selectedTechnology) {
+            // Display a message asking the user to select all options
+            document.getElementById("error").textContent = "Please select Service, Brand, Device Type, and Technology.";
+            // Clear the dynamic details container
+            dynamicDetailsContainer.innerHTML = '';
+         } else {
+            // Get the price based on the selected device type, technology, and brand
+            const selectedDevicePrice = devicePricing[selectedBrand][selectedTechnology][selectedDeviceType];
+
+            // Set the "Check Up Fee" value in the hidden input field
+            document.getElementById("checkup_fee").value = selectedDevicePrice;
+            document.getElementById("types").value = selectedDeviceType;
+            document.getElementById("brand").value = selectedBrand;
+            document.getElementById("technology").value = selectedTechnology;
+
+            // Generate the dynamic content
+            const dynamicContent = `
+            <p>Service: ${selectedService}</p>
+            <p>Brand: ${selectedBrand}</p>
+            <p>Device Type: ${selectedDeviceType}</p>
+            <p>Technology: ${selectedTechnology}</p>
+            <p name="price">Check Up Fee: <span name="price" style="color: red;">₱${selectedDevicePrice} Per Unit</span></p>
+        `;
+
+            // Update the container with the dynamic content
+            dynamicDetailsContainer.innerHTML = dynamicContent;
+
+            // Clear the error message
+            document.getElementById("error").textContent = "";
+         }
+      });
+
+
+      // Add a form submit event listener
+      document.querySelector("form").addEventListener("submit", function (e) {
+         // Check if the checkup fee field is empty
+         if (document.getElementById("checkup_fee").value === "") {
+            e.preventDefault(); // Prevent the form from submitting
+            // Display an error message
+            document.getElementById("error").textContent = "Please click 'Show Pricing' before submitting.";
+         }
+      });
+   </script>
 
    <!-- footer-section-ends -->
    <script type="text/javascript">

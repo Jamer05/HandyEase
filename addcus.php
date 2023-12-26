@@ -26,10 +26,15 @@ $area = mysqli_real_escape_string($conn, $_POST['city']);
 $location = mysqli_real_escape_string($conn, $_POST['locality']);
 $request = mysqli_real_escape_string($conn, $_POST['selser']);
 $dateofreq = mysqli_real_escape_string($conn, date("Y-m-d"));
-$price = mysqli_real_escape_string($conn, $_POST['price']);
+$price = mysqli_real_escape_string($conn, $_POST['checkup']);
+$types = mysqli_real_escape_string($conn, $_POST['types']);
 $aflag = 0;
 $transflag = 0;
 $status = 'Ongoing';
+$brand = mysqli_real_escape_string($conn, $_POST['brand']);
+$technology= mysqli_real_escape_string($conn, $_POST['technology']);
+$information = mysqli_real_escape_string($conn, $_POST['information']);
+
 $logger->alert("Trying to book: $fname");
 // form validation: ensure that the form is correctly filled
 if (empty($fname)) {
@@ -53,6 +58,9 @@ if (empty($email)) {
 if (empty($area)) {
   array_push($errors, "Locality/Area is required");
 }
+if (empty($price)) {
+  array_push($errors, "Click the Show Pricing");
+}
 
 if (count($errors) == 0) {
   $query = "SELECT * FROM authoriser where location='" . $location . "' and request='" . $request . "'";
@@ -65,8 +73,8 @@ if (count($errors) == 0) {
   $query = mysqli_prepare($conn, "INSERT INTO customer (id,firstname,lastname,phone,email,area,city) VALUES (?,?,?,?,?,?,?)");
   mysqli_stmt_bind_param($query, 'sssssss', $id, $fname, $lname, $phone, $email, $area, $location);
 
-  $query1 = mysqli_prepare($conn, "INSERT INTO service (id,username,request,dateofreq,authid,aflag,transflag,status) VALUES (?,?,?,?,?,?,?,?)");
-  mysqli_stmt_bind_param($query1, 'ssssssis', $id,$fname, $request, $dateofreq, $authid, $aflag, $transflag, $status);
+  $query1 = mysqli_prepare($conn, "INSERT INTO service (id,username,request,dateofreq,authid,aflag,transflag,status,price,types,brand,technology,info) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+  mysqli_stmt_bind_param($query1, 'ssssssissssss', $id,$fname, $request, $dateofreq, $authid, $aflag, $transflag, $status, $price,$types,$brand,$technology,$information);
   //if authid is empty don't let customer book
   if (empty($authid)) {
     $logger->error("No authoriser found for $location");

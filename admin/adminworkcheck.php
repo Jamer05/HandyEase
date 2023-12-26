@@ -91,9 +91,9 @@ if (!isset($_SESSION['sess'])) {
                 </div>
                 <div class="login-section">
                     <ul>
-                        <li><a class="active" href="#">Welcome
-                                <?php echo $_SESSION['sess']; ?>
-                            </a></li>
+                        <li>Welcome
+                            <?php echo $_SESSION['sess']; ?>
+                        </li>
                         <li><a class="active" href="adminlogout.php">Logout</a></li>|
                         <li><a class="active" href="dashboard.php">Dashboard</a></li>
                         <li><a href="#"></a> </li>
@@ -110,48 +110,47 @@ if (!isset($_SESSION['sess'])) {
         <div class="main">
             <div class="container">
                 <div class="clearfix"></div>
-                <div class="wow fadeInDownBig" data-wow-delay="0.4s">
-                    <table id="customers1" style="width:80%;" class="table-responsive">
-                        <div class="clearfix"></div>
-                        <br>
-                        <tr>
-                            <th>Worker_id</th>
-                            <th>Worker First_Name</th>
-                            <th> Worker Last Name</th>
-                            <th> Worker Phone Number</th>
-                            <th>Profession</th>
-                            <th>Area</th>
-                            <th>Authorizer id</th>
-                        </tr>
-                        <?php
-                        /**
-                         * fetch data from table
-                         */
-                        $query = mysqli_query($conn, "select * from worker");
-                        if (mysqli_num_rows($query) > 0) {
-                            while ($row = mysqli_fetch_array($query)) {
-                                echo "<tr>";
-                                echo "<td>" . $row[0] . "</td>";
-                                echo "<td>" . $row[1] . "</td>";
-                                echo "<td>" . $row[2] . "</td>";
-                                echo "<td>" . $row[5] . "</td>";
-                                echo "<td>" . $row[6] . "</td>";
-                                echo "<td>" . $row[10] . "</td>";
-                                echo "<td>" . $row[7] . "</td>";
-                                echo "</tr>";
-                            }
-                        } else {
+                <table id="customers1" style="width:80%;" class="table-responsive">
+                    <div class="clearfix"></div>
+                    <br>
+                    <tr>
+                        <th>Worker_id</th>
+                        <th>Worker First_Name</th>
+                        <th> Worker Last Name</th>
+                        <th> Worker Phone Number</th>
+                        <th>Profession</th>
+                        <th>Area</th>
+                        <th>Authorizer id</th>
+                    </tr>
+                    <?php
+                    /**
+                     * fetch data from table
+                     */
+                    $query = mysqli_query($conn, "select * from worker");
+                    if (mysqli_num_rows($query) > 0) {
+                        while ($row = mysqli_fetch_array($query)) {
                             echo "<tr>";
-                            echo "<td colspan='7'>No data</td>";
+                            echo "<td>" . $row[0] . "</td>";
+                            echo "<td>" . $row[1] . "</td>";
+                            echo "<td>" . $row[2] . "</td>";
+                            echo "<td>" . $row[5] . "</td>";
+                            echo "<td>" . $row[6] . "</td>";
+                            echo "<td>" . $row[10] . "</td>";
+                            echo "<td>" . $row[7] . "</td>";
                             echo "</tr>";
                         }
-                        ?>
-                    </table>
-                    <br><br><br><br>
-                </div>
+                    } else {
+                        echo "<tr>";
+                        echo "<td colspan='7'>No data</td>";
+                        echo "</tr>";
+                    }
+                    ?>
+                </table>
+                <br><br><br><br>
             </div>
-            <div class="clearfix"></div>
         </div>
+        <div class="clearfix"></div>
+    </div>
     </div>
     <script>
         function searchDatabase() {

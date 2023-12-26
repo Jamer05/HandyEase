@@ -82,8 +82,7 @@ include '../include/session.php';
                             </div>
                         </li>|
                         <li><a class="active" href="finance.php">Finance</a></li>|
-                        <li><a class="active" href="add_service.php">Add Service</a></li>|
-
+          
                         <div class="clearfix"></div>
                     </ul>
                 </div>
@@ -343,7 +342,6 @@ include '../include/session.php';
             }
         });
     </script>
-    <?php include '../include/footer.php'; ?>
 
 </body>
 

@@ -93,9 +93,10 @@ if (!isset($_SESSION['username'])) {
         <div class="container">
             <div class="top-menu">
                 <ul>
-                    <li><a href="customer.php">Book</a></li>
+                    <li><a href="service.php">Book</a></li>
                     <li><a href="chat_real.php">Chat</a></li>
                     <li><a href="appointment.php">Updates</a></li>
+                    <li><a href="completed.php">Completed</a></li>
                     <li><a href="logout.php">Signout</a></li>
                     <div class="clearfix"></div>
                 </ul>
@@ -181,7 +182,9 @@ if (!isset($_SESSION['username'])) {
         <div class="ordering-section" id="Order">
             <div class="container">
                 <div class="ordering-section-head text-center wow bounceInRight" data-wow-delay="0.4s">
-                    <h3>Hello <?php echo $_SESSION['name']; ?></h3>
+                    <h3>Hello
+                        <?php echo $_SESSION['name']; ?>
+                    </h3>
                     <div class="dotted-line">
                         <h4>Just 4 steps to follow </h4>
                     </div>
@@ -246,9 +249,10 @@ if (!isset($_SESSION['username'])) {
                         <div class="ordering-section-grid-process wow fadeInRight" data-wow-delay="0.4s">
                             <i class="one"></i><br>
 
-                            <p style="margin-top: 0.1em;">Total Customers <br><br>
+                            <p style="margin-top: 0.1em;">Completed Request <br><br>
                                 <?php
-                                $que = "SELECT count(*) from customer";
+                                $user = $_SESSION['username'];
+                                $que = "SELECT count(*) from service where transflag=1 AND username='$user'";
                                 $result = mysqli_query($conn, $que);
                                 $ros = mysqli_fetch_row($result);
                                 echo $ros[0];
@@ -260,9 +264,10 @@ if (!isset($_SESSION['username'])) {
                     <div class="col-md-3 ordering-section-grid">
                         <div class="ordering-section-grid-process wow fadeInRight" data-wow-delay="0.4s">
                             <i class="two"></i><br>
-                            <p style="margin-top: 0.1em;">Total Authorisers <br><br>
+                            <p style="margin-top: 0.1em;">Canceled Request<br><br>
                                 <?php
-                                $que = "SELECT count(*) from authoriser";
+                                $username = $_SESSION['username'];
+                                $que = "SELECT COUNT(*) FROM service WHERE status = 'Hidden' AND username = '$username'";
                                 $result = mysqli_query($conn, $que);
                                 $ros1 = mysqli_fetch_row($result);
                                 echo $ros1[0];
@@ -290,9 +295,11 @@ if (!isset($_SESSION['username'])) {
                         <div class="ordering-section-grid-process wow fadeInRight" data-wow-delay="0.4s">
                             <i class="four"></i><br>
 
-                            <p style="margin-top: 0.1em;">Pending Jobs<br><br><br>
+                            <p style="margin-top: 0.1em;">Pending Request<br><br>
                                 <?php
-                                $que = "SELECT COUNT(*) as pending_customers FROM service WHERE status = 'Pending'";
+                                $username = $_SESSION['username'];
+                                $que = "SELECT COUNT(*) as pending_customers FROM service WHERE status = 'Pending' AND username = '$username'";
+
                                 $result = mysqli_query($conn, $que);
                                 $ros4 = mysqli_fetch_row($result);
                                 echo $ros4[0];
